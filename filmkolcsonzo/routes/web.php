@@ -20,3 +20,6 @@ Route::delete('/films/{id}', [MovieController::class, 'destroy'])->name('movies.
 
 Route::get('/films/{id}', [RentController::class, 'show'])->name('movies.show');
 Route::post('/rent', [RentController::class, 'store'])->name('rents.store');
+
+Route::get('/rented', [RentController::class,'index'])->name('rents.index');
+Route::put('/rented', [RentController::class,'update'])->name('rents.update');
