@@ -36,7 +36,7 @@ class MovieController extends Controller
             $query->where('title', 'like', '%' . $request->input('title') . '%');
         }
 
-        $movies = $query->with('genre');
+        $movies = $query->get();
 
         return view('movies.index', compact('movies'));
     }
