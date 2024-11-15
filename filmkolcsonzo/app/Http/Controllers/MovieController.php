@@ -27,4 +27,23 @@ class MovieController extends Controller
 
         return redirect()->route('movies.create')->with('success', 'A filmet rögzítettük!');
     }
+
+    public function index(Request $request)
+    {
+        $query = Movie::query();
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->input('title') . '%');
+        }
+
+        $movies = $query->with('genre');
+
+        return view('movies.index', compact('movies'));
+    }
+
+    public function destroy($id)
+    {
+        Movie::findOrFail($id)->delete();
+        return redirect()->route('movies.index')->with('success', 'A filmet töröltük!');
+    }
 }
